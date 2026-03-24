@@ -15,53 +15,51 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-md space-y-8">
-        {/* Logo */}
+      <div className="w-full max-w-sm space-y-6">
         <div className="text-center">
-          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-4">
-            <GraduationCap className="w-9 h-9 text-primary-foreground" />
+          <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-3">
+            <GraduationCap className="w-7 h-7 text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-display font-bold">AulaHub</h1>
-          <p className="text-muted-foreground mt-2">Gestão de Aulas Online</p>
+          <h1 className="text-xl font-display font-bold text-foreground">AulaHub</h1>
+          <p className="text-sm text-muted-foreground mt-1">Gestão de Aulas Online</p>
         </div>
 
-        {/* Role Selector */}
-        <div className="flex gap-2 p-1 bg-secondary rounded-xl">
+        {/* Role */}
+        <div className="flex gap-1 p-1 bg-secondary rounded-lg">
           <button
             onClick={() => setRole("professor")}
-            className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              role === "professor" ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:text-foreground"
+            className={`flex-1 py-2 rounded-md text-xs font-medium transition-all ${
+              role === "professor" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
             }`}
           >
             Professor
           </button>
           <button
             onClick={() => setRole("aluno")}
-            className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              role === "aluno" ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:text-foreground"
+            className={`flex-1 py-2 rounded-md text-xs font-medium transition-all ${
+              role === "aluno" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
             }`}
           >
             Aluno
           </button>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleLogin} className="glass-card p-6 space-y-4">
+        <form onSubmit={handleLogin} className="bg-card rounded-lg border border-border p-5 space-y-4">
           <div>
-            <label className="text-sm font-medium mb-1.5 block">E-mail</label>
-            <Input type="email" placeholder="seu@email.com" defaultValue="demo@aulahub.com" />
+            <label className="text-xs font-medium text-foreground mb-1.5 block">E-mail</label>
+            <Input type="email" placeholder="seu@email.com" defaultValue="demo@aulahub.com" className="h-9 text-sm" />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Senha</label>
-            <Input type="password" placeholder="••••••••" defaultValue="123456" />
+            <label className="text-xs font-medium text-foreground mb-1.5 block">Senha</label>
+            <Input type="password" placeholder="••••••••" defaultValue="123456" className="h-9 text-sm" />
           </div>
-          <Button type="submit" className="w-full gap-2">
-            Entrar <ArrowRight className="w-4 h-4" />
+          <Button type="submit" className="w-full gap-1.5 text-sm" size="sm">
+            Entrar <ArrowRight className="w-3.5 h-3.5" />
           </Button>
         </form>
 
         <p className="text-center text-xs text-muted-foreground">
-          Demo: selecione o perfil e clique em Entrar
+          Selecione o perfil e clique em Entrar
         </p>
       </div>
     </div>
