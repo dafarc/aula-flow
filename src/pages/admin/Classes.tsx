@@ -7,24 +7,29 @@ const Classes = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-display font-bold">Turmas</h1>
-          <p className="text-muted-foreground text-sm mt-1">Organize seus alunos em turmas.</p>
+          <h1 className="text-xl font-display font-bold">Turmas</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">Organize seus alunos em turmas.</p>
         </div>
-        <Button className="gap-2">
-          <Plus className="w-4 h-4" /> Nova Turma
+        <Button size="sm" className="gap-1.5 text-xs">
+          <Plus className="w-3.5 h-3.5" /> Nova Turma
         </Button>
       </div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="bg-card rounded-lg border border-border divide-y divide-border">
         {mockClasses.map((cls) => {
           const course = mockCourses.find((c) => c.id === cls.courseId);
           return (
-            <div key={cls.id} className="glass-card p-5 hover:border-primary/30 transition-colors cursor-pointer">
-              <h3 className="font-display font-semibold">{cls.name}</h3>
-              {course && <p className="text-xs text-primary mt-1">{course.title}</p>}
-              <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" /> {cls.studentsCount} alunos</span>
-                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {cls.startDate}</span>
+            <div key={cls.id} className="flex items-center gap-4 px-4 py-3.5 hover:bg-secondary/50 transition-colors cursor-pointer">
+              <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center shrink-0">
+                <Users className="w-4 h-4 text-muted-foreground" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground">{cls.name}</p>
+                {course && <p className="text-xs text-primary">{course.title}</p>}
+              </div>
+              <div className="hidden sm:flex items-center gap-4 text-xs text-muted-foreground shrink-0">
+                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {cls.studentsCount}</span>
+                <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {cls.startDate}</span>
               </div>
             </div>
           );

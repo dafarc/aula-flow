@@ -14,17 +14,15 @@ const StudentCourse = () => {
   const [notesOpen, setNotesOpen] = useState(false);
 
   const toggleModule = (id: string) => {
-    setOpenModules((prev) =>
-      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]
-    );
+    setOpenModules((prev) => prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]);
   };
 
   if (!course) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <p className="text-muted-foreground">Curso não encontrado.</p>
-          <Link to="/student" className="text-primary hover:underline text-sm">Voltar</Link>
+          <p className="text-sm text-muted-foreground">Curso não encontrado.</p>
+          <Link to="/student" className="text-primary hover:underline text-xs">Voltar</Link>
         </div>
       </div>
     );
@@ -36,67 +34,65 @@ const StudentCourse = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-30">
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <GraduationCap className="w-5 h-5 text-primary-foreground" />
+      <header className="border-b border-border bg-card sticky top-0 z-30">
+        <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+              <GraduationCap className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="font-display font-bold">AulaHub</span>
+            <span className="font-display text-sm font-bold text-foreground">AulaHub</span>
           </div>
-          <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-destructive transition-colors">
-            <LogOut className="w-4 h-4" /> Sair
+          <Link to="/" className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-destructive transition-colors">
+            <LogOut className="w-3.5 h-3.5" /> Sair
           </Link>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 space-y-6">
-        <div className="flex items-center gap-3">
-          <Link to="/student" className="p-2 rounded-lg hover:bg-secondary transition-colors">
-            <ChevronLeft className="w-5 h-5" />
+      <div className="max-w-5xl mx-auto px-4 py-6 space-y-5">
+        <div className="flex items-center gap-2">
+          <Link to="/student" className="p-1.5 rounded-md hover:bg-secondary transition-colors">
+            <ChevronLeft className="w-4 h-4 text-muted-foreground" />
           </Link>
-          <div className="flex-1">
-            <h1 className="text-xl font-display font-bold">{course.title}</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">{course.description}</p>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-display font-bold truncate">{course.title}</h1>
           </div>
-          <button onClick={() => setNotesOpen(!notesOpen)} className="p-2 rounded-lg hover:bg-secondary transition-colors" title="Caderno de Anotações">
-            <StickyNote className="w-5 h-5 text-primary" />
+          <button onClick={() => setNotesOpen(!notesOpen)} className={`p-2 rounded-md transition-colors ${notesOpen ? 'bg-primary/10 text-primary' : 'hover:bg-secondary text-muted-foreground'}`} title="Anotações">
+            <StickyNote className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="glass-card p-4">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-muted-foreground">Seu progresso</p>
-            <p className="text-sm font-medium">{progressPercent}%</p>
+        <div className="bg-card rounded-lg border border-border p-3.5">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs text-muted-foreground">Seu progresso</span>
+            <span className="text-xs font-medium">{progressPercent}%</span>
           </div>
-          <Progress value={progressPercent} className="h-2" />
+          <Progress value={progressPercent} className="h-1.5" />
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          <div className={`space-y-3 ${notesOpen ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
+        <div className="grid lg:grid-cols-3 gap-5">
+          <div className={`space-y-2 ${notesOpen ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
             {modules.map((mod) => {
               const isOpen = openModules.includes(mod.id);
               return (
-                <div key={mod.id} className="glass-card overflow-hidden">
-                  <button onClick={() => toggleModule(mod.id)} className="w-full flex items-center gap-3 p-4 hover:bg-secondary/50 transition-colors">
-                    {isOpen ? <ChevronDown className="w-4 h-4 text-muted-foreground" /> : <ChevronRight className="w-4 h-4 text-muted-foreground" />}
-                    <p className="font-medium text-sm text-left flex-1">Módulo {mod.order}: {mod.title}</p>
+                <div key={mod.id} className="bg-card rounded-lg border border-border overflow-hidden">
+                  <button onClick={() => toggleModule(mod.id)} className="w-full flex items-center gap-2 px-4 py-3 hover:bg-secondary/50 transition-colors">
+                    {isOpen ? <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" /> : <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />}
+                    <span className="text-sm font-semibold text-foreground flex-1 text-left">{mod.order}. {mod.title}</span>
                   </button>
                   {isOpen && (
                     <div className="border-t border-border">
                       {mod.lessons.map((lesson) => {
                         const Icon = typeIcons[lesson.type];
                         return (
-                          <div key={lesson.id} className="flex items-center gap-3 px-4 py-3 hover:bg-secondary/30 transition-colors border-b border-border/50 last:border-b-0 cursor-pointer">
+                          <div key={lesson.id} className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-secondary/30 transition-colors border-b border-border/50 last:border-b-0 cursor-pointer">
                             {lesson.completed ? (
-                              <CheckCircle2 className="w-5 h-5 text-success shrink-0" />
+                              <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
                             ) : (
-                              <Icon className="w-5 h-5 text-muted-foreground shrink-0" />
+                              <div className="w-4 h-4 rounded-full border-2 border-border shrink-0" />
                             )}
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium truncate">{lesson.title}</p>
-                              <p className="text-xs text-muted-foreground">{lesson.duration || ''}</p>
-                            </div>
+                            <Icon className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                            <span className="text-sm text-foreground flex-1 truncate">{lesson.title}</span>
+                            {lesson.duration && <span className="text-xs text-muted-foreground">{lesson.duration}</span>}
                           </div>
                         );
                       })}
@@ -107,17 +103,16 @@ const StudentCourse = () => {
             })}
           </div>
 
-          {/* Notes Panel */}
           {notesOpen && (
-            <div className="glass-card p-5 h-fit sticky top-20">
-              <h3 className="font-display font-semibold flex items-center gap-2 mb-4">
-                <StickyNote className="w-4 h-4 text-primary" /> Caderno de Anotações
+            <div className="bg-card rounded-lg border border-border p-4 h-fit sticky top-20">
+              <h3 className="text-sm font-semibold flex items-center gap-2 mb-3">
+                <StickyNote className="w-3.5 h-3.5 text-primary" /> Anotações
               </h3>
               <textarea
-                placeholder="Escreva suas anotações aqui..."
-                className="w-full h-64 bg-secondary/50 rounded-lg p-3 text-sm resize-none focus:outline-none focus:ring-1 focus:ring-primary border border-border"
+                placeholder="Escreva suas anotações..."
+                className="w-full h-56 bg-secondary/50 rounded-md p-3 text-sm resize-none focus:outline-none focus:ring-1 focus:ring-primary border border-border"
               />
-              <p className="text-xs text-muted-foreground mt-2">As anotações são salvas automaticamente por aula.</p>
+              <p className="text-[11px] text-muted-foreground mt-2">Salvas automaticamente por aula.</p>
             </div>
           )}
         </div>
